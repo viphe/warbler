@@ -5,8 +5,8 @@ if $servlet_context.nil?
   ENV['BUNDLE_GEMFILE'] ||= File.expand_path(File.join('..', '..', '<%= config.bundler[:gemfile_path] %>'), __FILE__)
 <% end %>
 else
-  ENV['GEM_HOME'] <%= assignment_operator %> $servlet_context.getRealPath('<%= config.gem_path %>')
+  ENV['GEM_HOME'] <%= assignment_operator %> Warbler::FileLocator.get_real_path('<%= config.gem_path %>')
 <% if config.bundler && config.bundler[:gemfile_path] %>
-  ENV['BUNDLE_GEMFILE'] ||= $servlet_context.getRealPath('/<%= config.bundler[:gemfile_path] %>')
+  ENV['BUNDLE_GEMFILE'] ||= Warbler::FileLocator.get_real_path('/<%= config.bundler[:gemfile_path] %>')
 <% end %>
 end

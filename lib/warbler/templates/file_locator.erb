@@ -1,0 +1,23 @@
+
+module Warbler
+  class FileLocator
+
+    @@osgi_locator ||=
+      begin
+        Java::OrgEclipseCoreRuntime::FileLocator
+      rescue NameError
+        nil
+      end
+
+    def self.get_real_path(path)
+      if @@osgi_locator
+        real_path_url = $servlet_context.getResource(path)
+        @@osgi_locator.toFileURL(real_path_url).getPath()
+      else
+        $servlet_context.getRealPath(path)
+      end
+    end
+
+  end
+end
+
