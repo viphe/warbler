@@ -1,1 +1,3 @@
 ENV['RAILS_ENV'] ||= '<%=  config.webxml.rails.env %>'
+
+$LOAD_PATH.unshift Warbler::FileLocator.get_real_path('/WEB-INF') if $servlet_context
